@@ -77,7 +77,7 @@ if(ingreso === 2){
       Modelo: ${item.modelo}
       Precio: $${item.precio}
       Precio en 12 cuotas: $${(cuotas12(item.precio)).toFixed(2)}
-      Cuotas de: $${(cuotas12(item.precio)/12).toFixed(2)}
+      Cuotas de: $${(cuotas12(item.precio)/12).toFixed(2)} 
     `; 
     alert(salida);
   });
