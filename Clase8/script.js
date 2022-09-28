@@ -50,23 +50,33 @@ const baseDeDatos = [
   }
 ];
 
-let contenedor = document.getElementById("contenedor");
+let contenedor = document.getElementById('contenedor');
+let formulario = document.getElementById('formulario1');
+let inputMarca = document.getElementById('marca');
+let inputBuscarMarca = document.getElementById('buscarMarca');
 
-let formulario = document.getElementById("formulario1");
-
-formulario.addEventListener("submit", (e) => {
-  e.preventDefault();
-  contenedor.innerHTML = "";
-  let inputs = e.target.children;
-
-  let producto = baseDeDatos.find((item) => item.marca === inputs[0].value);
-  console.log(inputs[0].value);
-  let div = document.createElement("div");
-  div.innerHTML = `
-    <h2>Id: ${producto.id}</h2>
-    <p>Nombre: ${producto.marca}</p>
-    <b>$${producto.precio}</b>
-  `;
-
-  contenedor.append(div);
+formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
+  let marca = inputMarca.value.toUpperCase()
+	let producto = baseDeDatos.filter((item) => item.marca === marca);
+  console.log(producto);
+ 
+  console.log(marca);
+  if ((marca == "MOTOROLA") || (marca == "SAMSUNG" )) {
+    producto.forEach((item) => {
+      let div = document.createElement('div');
+      div.innerHTML = `
+      <h2>Id: ${item.id}</h2>
+      <p>Nombre: ${item.marca}</p>
+      <p><b>$${item.precio}</b></p>
+      `;
+      contenedor.append(div);
+    });
+  }
+  else {
+		alert('La marca para el producto que desea no existe, por favor vuelva a introducir la marca.');
+	};
+  
 });
+
+
