@@ -29,7 +29,7 @@ const baseDeDatos = [
     marca: "MOTOROLA",
     precio: 60320,
     imagen: "motoG52.png",
-    oferta: false
+    oferta: true
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const baseDeDatos = [
     marca: "MOTOROLA",
     precio: 35000,
     imagen: "motoE20.png",
-    oferta: false
+    oferta: true
   },
   {
     id: 8,
@@ -99,6 +99,7 @@ let linkSam = document.getElementById("SAMSUNG");
 let linkLG = document.getElementById("LG");
 let mostrarCarro = document.getElementById("mostrarCarrito");
 let mostrarProductos = document.getElementById("mostrarTodos");
+let mostrarOfertas = document.getElementById("mostrarOfertas");
 let mostrarContacto = document.getElementById("mostrarContacto");
 
 let carritoTemp = localStorage.getItem("carrito");
@@ -202,6 +203,42 @@ function filtrarProductos(e){
   });
 };
 
+
+function filtrarOfertas(e){
+  e.preventDefault();
+  contenedor.innerHTML = "";
+  let producto = baseDeDatos.filter((item) => item.oferta === true);
+  producto.forEach((item) => {
+    let div = document.createElement('div');
+    div.innerHTML = `
+    <div class="center_prod_box">
+        <div class="product_title"><a>${item.marca}-${item.modelo}</a></div>
+        <div class="product_img"><a><img src="./images/${item.imagen}" alt="" border="0" width="70" height="90" /></a></div>
+        <div class="prod_price"><span class="price">$${item.precio}</span></div>
+        <a onclick="agregarAlCarrito(${item.id})" title="agregar"><img src="images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">detalles</a>
+    </div>
+    `;
+    contenedor.append(div);
+  });
+};
+
+function mostrarTodos(e){
+  e.preventDefault();
+  contenedor.innerHTML = "";
+  baseDeDatos.forEach((item) => {
+    let div = document.createElement('div');
+    div.innerHTML = `
+    <div class="center_prod_box">
+        <div class="product_title"><a>${item.marca}-${item.modelo}</a></div>
+        <div class="product_img"><a><img src="./images/${item.imagen}" alt="" border="0" width="70" height="90" /></a></div>
+        <div class="prod_price"><span class="price">$${item.precio}</span></div>
+        <a onclick="agregarAlCarrito(${item.id})" title="agregar"><img src="images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">detalles</a>
+    </div>
+    `;
+    contenedor.append(div);
+  });
+};
+
 formulario1.addEventListener('submit', (e) => {
     e.preventDefault();
     contenedor.innerHTML = "";
@@ -278,7 +315,9 @@ async function getContactoPage(e){
 
 mostrarInfoCarrito();
 
-mostrarProductos.addEventListener("click", filtrarProductos);
+mostrarOfertas.addEventListener("click", filtrarOfertas);
+
+mostrarProductos.addEventListener("click", mostrarTodos);
 
 mostrarContacto.addEventListener("click", getContactoPage);
 
@@ -289,6 +328,8 @@ linkSam.addEventListener("click", filtrarProductos);
 linkLG.addEventListener("click", filtrarProductos);
 
 mostrarCarro.addEventListener("click", mostrarCarrito);
+
+
 
 
 

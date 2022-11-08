@@ -19,6 +19,15 @@ p {
     padding: 0px;
 }
 
+.imgIndex{
+    text-align: center;
+    display: block;
+    align-items: center;
+}
+.textIndex{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
 .filtro {
     display: none;
 }
